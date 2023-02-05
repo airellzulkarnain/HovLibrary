@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 11.125" name="HovLibraryDatabase">
+  <DataContextMoniker Name="/HovLibraryDatabaseDataContext" />
+  <nestedChildShapes>
+    <classShape Id="f2125463-120a-4fe4-a895-d9cc3deb489c" absoluteBounds="3.5, 1, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/HovLibraryDatabaseDataContext/book" />
+      <nestedChildShapes>
+        <elementListCompartment Id="37a42c7a-8b2c-444d-91f9-5c7a8942dabd" absoluteBounds="3.5149999999999997, 1.46, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2ba4d0ea-0ddb-4e84-9008-b958508624c5" absoluteBounds="0.75, 7.375, 2, 3.5016097005208335">
+      <DataClassMoniker Name="/HovLibraryDatabaseDataContext/book_detail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e63de984-ca7a-4e9c-9bd8-2ae893829c2b" absoluteBounds="0.76500000000000012, 7.835, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 9.12580485026042); (3.59375 : 9.12580485026042); (3.59375 : 3.5401025390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HovLibraryDatabaseDataContext/book_detail/book_detail_book" />
+      <nodes>
+        <classShapeMoniker Id="2ba4d0ea-0ddb-4e84-9008-b958508624c5" />
+        <classShapeMoniker Id="f2125463-120a-4fe4-a895-d9cc3deb489c" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="9f7b6124-3845-47fb-acf0-f09ee7fbfd98" absoluteBounds="0.75, 4.875, 2, 1.7708968098958326">
+      <DataClassMoniker Name="/HovLibraryDatabaseDataContext/book_location" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5ae7a851-9937-4505-a2cb-202f91425506" absoluteBounds="0.76500000000000012, 5.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 4.875); (3.125 : 4.5); (3.125 : 2.27005126953125); (3.5 : 2.27005126953125)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HovLibraryDatabaseDataContext/book_location/book_location_book" />
+      <nodes>
+        <classShapeMoniker Id="9f7b6124-3845-47fb-acf0-f09ee7fbfd98" />
+        <classShapeMoniker Id="f2125463-120a-4fe4-a895-d9cc3deb489c" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="502beb4b-e7a0-49c8-811f-9c1620f0442b" absoluteBounds="3.75, 4.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/HovLibraryDatabaseDataContext/employee" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cb54b74b-11c7-4c4e-a1a6-13e9cba7b525" absoluteBounds="3.765, 5.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f4842bb7-20e8-4a3e-bd22-adb12873d5f5" absoluteBounds="0.75, 1, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/HovLibraryDatabaseDataContext/member" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8ffc61b8-f070-41fb-b165-25ce62a6da8e" absoluteBounds="0.76500000000000012, 1.46, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 1.57252563476563); (3.5 : 1.57252563476563)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HovLibraryDatabaseDataContext/member/member_book" />
+      <nodes>
+        <classShapeMoniker Id="f4842bb7-20e8-4a3e-bd22-adb12873d5f5" />
+        <classShapeMoniker Id="f2125463-120a-4fe4-a895-d9cc3deb489c" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
