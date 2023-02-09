@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Security.Policy;
+using System.Text.RegularExpressions;
 
 namespace HovLibrary
 {
@@ -30,5 +31,9 @@ namespace HovLibrary
             }
             return result.ToString();
         }
+
+        public static Regex email_regex = new Regex(@"^[a-zA-Z0-9.]+@[a-zA-Z]+.[a-zA-Z]+$", RegexOptions.IgnoreCase);
+        public static Regex letter_regex = new Regex(@"^[a-zA-Z][a-zA-Z ]+$", RegexOptions.IgnoreCase);
+        public static Regex number_regex = new Regex(@"^[0-9]+$", RegexOptions.IgnoreCase);
     }
 }

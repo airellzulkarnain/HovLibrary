@@ -261,6 +261,7 @@
             // 
             this.memberDataGridView.AllowUserToAddRows = false;
             this.memberDataGridView.AllowUserToDeleteRows = false;
+            this.memberDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.memberDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.memberDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.memberDataGridView.Location = new System.Drawing.Point(3, 55);
@@ -280,6 +281,7 @@
             this.saveChangesButton.TabIndex = 2;
             this.saveChangesButton.Text = "Save Changes";
             this.saveChangesButton.UseVisualStyleBackColor = true;
+            this.saveChangesButton.Click += new System.EventHandler(this.save_changes);
             // 
             // label1
             // 

@@ -16,11 +16,11 @@ namespace HovLibrary
         private HovLibraryDatabaseDataContext db;
         private employee _employee;
         public int employee_id { get { return _employee.id; } }
-        Regex email_regex = new Regex(@"^[a-zA-Z0-9.]+@[a-zA-Z]+.[a-zA-Z]+$", RegexOptions.IgnoreCase);
+        
         public LoginForm()
         {
             InitializeComponent();
-            db = new HovLibraryDatabaseDataContext();
+            db = new HovLibraryDatabaseDataContext(@"Data Source=DESKTOP-E12UESD;Initial Catalog=hov_library;Integrated Security=true;");
         }
 
         private void LoginButtonClicked(object sender, EventArgs e)
@@ -33,7 +33,7 @@ namespace HovLibrary
             }
             else
             {
-                if (!email_regex.IsMatch(emailTextBox.Text))
+                if (!Helper.email_regex.IsMatch(emailTextBox.Text))
                 {
                     MessageBox.Show("Email is invalid !", "Login Failed !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
