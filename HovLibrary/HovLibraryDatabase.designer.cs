@@ -33,9 +33,6 @@ namespace HovLibrary
     partial void Insertbook(book instance);
     partial void Updatebook(book instance);
     partial void Deletebook(book instance);
-    partial void Insertbook_detail(book_detail instance);
-    partial void Updatebook_detail(book_detail instance);
-    partial void Deletebook_detail(book_detail instance);
     partial void Insertbook_location(book_location instance);
     partial void Updatebook_location(book_location instance);
     partial void Deletebook_location(book_location instance);
@@ -45,6 +42,9 @@ namespace HovLibrary
     partial void Insertmember(member instance);
     partial void Updatemember(member instance);
     partial void Deletemember(member instance);
+    partial void Insertbook_detail(book_detail instance);
+    partial void Updatebook_detail(book_detail instance);
+    partial void Deletebook_detail(book_detail instance);
     #endregion
 		
 		public HovLibraryDatabaseDataContext() : 
@@ -85,14 +85,6 @@ namespace HovLibrary
 			}
 		}
 		
-		public System.Data.Linq.Table<book_detail> book_details
-		{
-			get
-			{
-				return this.GetTable<book_detail>();
-			}
-		}
-		
 		public System.Data.Linq.Table<book_location> book_locations
 		{
 			get
@@ -114,6 +106,14 @@ namespace HovLibrary
 			get
 			{
 				return this.GetTable<member>();
+			}
+		}
+		
+		public System.Data.Linq.Table<book_detail> book_details
+		{
+			get
+			{
+				return this.GetTable<book_detail>();
 			}
 		}
 	}
@@ -142,11 +142,11 @@ namespace HovLibrary
 		
 		private System.Nullable<System.DateTime> _deleted_at;
 		
-		private EntityRef<book_detail> _book_detail;
-		
 		private EntityRef<book_location> _book_location;
 		
 		private EntityRef<member> _member;
+		
+		private EntityRef<book_detail> _book_detail;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -174,9 +174,9 @@ namespace HovLibrary
 		
 		public book()
 		{
-			this._book_detail = default(EntityRef<book_detail>);
 			this._book_location = default(EntityRef<book_location>);
 			this._member = default(EntityRef<member>);
+			this._book_detail = default(EntityRef<book_detail>);
 			OnCreated();
 		}
 		
@@ -372,40 +372,6 @@ namespace HovLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="book_detail_book", Storage="_book_detail", ThisKey="book_details_id", OtherKey="id", IsForeignKey=true)]
-		public book_detail book_detail
-		{
-			get
-			{
-				return this._book_detail.Entity;
-			}
-			set
-			{
-				book_detail previousValue = this._book_detail.Entity;
-				if (((previousValue != value) 
-							|| (this._book_detail.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._book_detail.Entity = null;
-						previousValue.books.Remove(this);
-					}
-					this._book_detail.Entity = value;
-					if ((value != null))
-					{
-						value.books.Add(this);
-						this._book_details_id = value.id;
-					}
-					else
-					{
-						this._book_details_id = default(int);
-					}
-					this.SendPropertyChanged("book_detail");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="book_location_book", Storage="_book_location", ThisKey="book_location_id", OtherKey="id", IsForeignKey=true)]
 		public book_location book_location
 		{
@@ -474,393 +440,37 @@ namespace HovLibrary
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.book_details")]
-	public partial class book_detail : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _language;
-		
-		private string _title;
-		
-		private string _isbn;
-		
-		private string _isbn13;
-		
-		private string _authors;
-		
-		private string _publisher;
-		
-		private System.DateTime _publish_date;
-		
-		private int _page_count;
-		
-		private decimal _ratings;
-		
-		private int _rating_count;
-		
-		private System.DateTime _created_at;
-		
-		private System.Nullable<System.DateTime> _updated_at;
-		
-		private System.Nullable<System.DateTime> _deleted_at;
-		
-		private EntitySet<book> _books;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnlanguageChanging(string value);
-    partial void OnlanguageChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void OnisbnChanging(string value);
-    partial void OnisbnChanged();
-    partial void Onisbn13Changing(string value);
-    partial void Onisbn13Changed();
-    partial void OnauthorsChanging(string value);
-    partial void OnauthorsChanged();
-    partial void OnpublisherChanging(string value);
-    partial void OnpublisherChanged();
-    partial void Onpublish_dateChanging(System.DateTime value);
-    partial void Onpublish_dateChanged();
-    partial void Onpage_countChanging(int value);
-    partial void Onpage_countChanged();
-    partial void OnratingsChanging(decimal value);
-    partial void OnratingsChanged();
-    partial void Onrating_countChanging(int value);
-    partial void Onrating_countChanged();
-    partial void Oncreated_atChanging(System.DateTime value);
-    partial void Oncreated_atChanged();
-    partial void Onupdated_atChanging(System.Nullable<System.DateTime> value);
-    partial void Onupdated_atChanged();
-    partial void Ondeleted_atChanging(System.Nullable<System.DateTime> value);
-    partial void Ondeleted_atChanged();
-    #endregion
-		
-		public book_detail()
-		{
-			this._books = new EntitySet<book>(new Action<book>(this.attach_books), new Action<book>(this.detach_books));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="book_detail_book", Storage="_book_detail", ThisKey="book_details_id", OtherKey="id", IsForeignKey=true)]
+		public book_detail book_detail
 		{
 			get
 			{
-				return this._id;
+				return this._book_detail.Entity;
 			}
 			set
 			{
-				if ((this._id != value))
+				book_detail previousValue = this._book_detail.Entity;
+				if (((previousValue != value) 
+							|| (this._book_detail.HasLoadedOrAssignedValue == false)))
 				{
-					this.OnidChanging(value);
 					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
+					if ((previousValue != null))
+					{
+						this._book_detail.Entity = null;
+						previousValue.books.Remove(this);
+					}
+					this._book_detail.Entity = value;
+					if ((value != null))
+					{
+						value.books.Add(this);
+						this._book_details_id = value.id;
+					}
+					else
+					{
+						this._book_details_id = default(int);
+					}
+					this.SendPropertyChanged("book_detail");
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_language", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string language
-		{
-			get
-			{
-				return this._language;
-			}
-			set
-			{
-				if ((this._language != value))
-				{
-					this.OnlanguageChanging(value);
-					this.SendPropertyChanging();
-					this._language = value;
-					this.SendPropertyChanged("language");
-					this.OnlanguageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this.OntitleChanging(value);
-					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isbn", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string isbn
-		{
-			get
-			{
-				return this._isbn;
-			}
-			set
-			{
-				if ((this._isbn != value))
-				{
-					this.OnisbnChanging(value);
-					this.SendPropertyChanging();
-					this._isbn = value;
-					this.SendPropertyChanged("isbn");
-					this.OnisbnChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isbn13", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string isbn13
-		{
-			get
-			{
-				return this._isbn13;
-			}
-			set
-			{
-				if ((this._isbn13 != value))
-				{
-					this.Onisbn13Changing(value);
-					this.SendPropertyChanging();
-					this._isbn13 = value;
-					this.SendPropertyChanged("isbn13");
-					this.Onisbn13Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_authors", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string authors
-		{
-			get
-			{
-				return this._authors;
-			}
-			set
-			{
-				if ((this._authors != value))
-				{
-					this.OnauthorsChanging(value);
-					this.SendPropertyChanging();
-					this._authors = value;
-					this.SendPropertyChanged("authors");
-					this.OnauthorsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publisher", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string publisher
-		{
-			get
-			{
-				return this._publisher;
-			}
-			set
-			{
-				if ((this._publisher != value))
-				{
-					this.OnpublisherChanging(value);
-					this.SendPropertyChanging();
-					this._publisher = value;
-					this.SendPropertyChanged("publisher");
-					this.OnpublisherChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publish_date", DbType="DateTime NOT NULL")]
-		public System.DateTime publish_date
-		{
-			get
-			{
-				return this._publish_date;
-			}
-			set
-			{
-				if ((this._publish_date != value))
-				{
-					this.Onpublish_dateChanging(value);
-					this.SendPropertyChanging();
-					this._publish_date = value;
-					this.SendPropertyChanged("publish_date");
-					this.Onpublish_dateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_page_count", DbType="Int NOT NULL")]
-		public int page_count
-		{
-			get
-			{
-				return this._page_count;
-			}
-			set
-			{
-				if ((this._page_count != value))
-				{
-					this.Onpage_countChanging(value);
-					this.SendPropertyChanging();
-					this._page_count = value;
-					this.SendPropertyChanged("page_count");
-					this.Onpage_countChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ratings", DbType="Decimal(3,2) NOT NULL")]
-		public decimal ratings
-		{
-			get
-			{
-				return this._ratings;
-			}
-			set
-			{
-				if ((this._ratings != value))
-				{
-					this.OnratingsChanging(value);
-					this.SendPropertyChanging();
-					this._ratings = value;
-					this.SendPropertyChanged("ratings");
-					this.OnratingsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rating_count", DbType="Int NOT NULL")]
-		public int rating_count
-		{
-			get
-			{
-				return this._rating_count;
-			}
-			set
-			{
-				if ((this._rating_count != value))
-				{
-					this.Onrating_countChanging(value);
-					this.SendPropertyChanging();
-					this._rating_count = value;
-					this.SendPropertyChanged("rating_count");
-					this.Onrating_countChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created_at", DbType="DateTime NOT NULL")]
-		public System.DateTime created_at
-		{
-			get
-			{
-				return this._created_at;
-			}
-			set
-			{
-				if ((this._created_at != value))
-				{
-					this.Oncreated_atChanging(value);
-					this.SendPropertyChanging();
-					this._created_at = value;
-					this.SendPropertyChanged("created_at");
-					this.Oncreated_atChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_updated_at", DbType="DateTime")]
-		public System.Nullable<System.DateTime> updated_at
-		{
-			get
-			{
-				return this._updated_at;
-			}
-			set
-			{
-				if ((this._updated_at != value))
-				{
-					this.Onupdated_atChanging(value);
-					this.SendPropertyChanging();
-					this._updated_at = value;
-					this.SendPropertyChanged("updated_at");
-					this.Onupdated_atChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted_at", DbType="DateTime")]
-		public System.Nullable<System.DateTime> deleted_at
-		{
-			get
-			{
-				return this._deleted_at;
-			}
-			set
-			{
-				if ((this._deleted_at != value))
-				{
-					this.Ondeleted_atChanging(value);
-					this.SendPropertyChanging();
-					this._deleted_at = value;
-					this.SendPropertyChanged("deleted_at");
-					this.Ondeleted_atChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="book_detail_book", Storage="_books", ThisKey="id", OtherKey="book_details_id")]
-		public EntitySet<book> books
-		{
-			get
-			{
-				return this._books;
-			}
-			set
-			{
-				this._books.Assign(value);
 			}
 		}
 		
@@ -882,18 +492,6 @@ namespace HovLibrary
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_books(book entity)
-		{
-			this.SendPropertyChanging();
-			entity.book_detail = this;
-		}
-		
-		private void detach_books(book entity)
-		{
-			this.SendPropertyChanging();
-			entity.book_detail = null;
 		}
 	}
 	
@@ -1592,6 +1190,384 @@ namespace HovLibrary
 		{
 			this.SendPropertyChanging();
 			entity.member = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.book_details")]
+	public partial class book_detail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _language;
+		
+		private string _title;
+		
+		private string _isbn;
+		
+		private string _isbn13;
+		
+		private string _authors;
+		
+		private string _publisher;
+		
+		private System.DateTime _publish_date;
+		
+		private int _page_count;
+		
+		private string _ratings;
+		
+		private System.DateTime _created_at;
+		
+		private System.Nullable<System.DateTime> _updated_at;
+		
+		private System.Nullable<System.DateTime> _deleted_at;
+		
+		private EntitySet<book> _books;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnlanguageChanging(string value);
+    partial void OnlanguageChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void OnisbnChanging(string value);
+    partial void OnisbnChanged();
+    partial void Onisbn13Changing(string value);
+    partial void Onisbn13Changed();
+    partial void OnauthorsChanging(string value);
+    partial void OnauthorsChanged();
+    partial void OnpublisherChanging(string value);
+    partial void OnpublisherChanged();
+    partial void Onpublish_dateChanging(System.DateTime value);
+    partial void Onpublish_dateChanged();
+    partial void Onpage_countChanging(int value);
+    partial void Onpage_countChanged();
+    partial void OnratingsChanging(string value);
+    partial void OnratingsChanged();
+    partial void Oncreated_atChanging(System.DateTime value);
+    partial void Oncreated_atChanged();
+    partial void Onupdated_atChanging(System.Nullable<System.DateTime> value);
+    partial void Onupdated_atChanged();
+    partial void Ondeleted_atChanging(System.Nullable<System.DateTime> value);
+    partial void Ondeleted_atChanged();
+    #endregion
+		
+		public book_detail()
+		{
+			this._books = new EntitySet<book>(new Action<book>(this.attach_books), new Action<book>(this.detach_books));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_language", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string language
+		{
+			get
+			{
+				return this._language;
+			}
+			set
+			{
+				if ((this._language != value))
+				{
+					this.OnlanguageChanging(value);
+					this.SendPropertyChanging();
+					this._language = value;
+					this.SendPropertyChanged("language");
+					this.OnlanguageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isbn", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string isbn
+		{
+			get
+			{
+				return this._isbn;
+			}
+			set
+			{
+				if ((this._isbn != value))
+				{
+					this.OnisbnChanging(value);
+					this.SendPropertyChanging();
+					this._isbn = value;
+					this.SendPropertyChanged("isbn");
+					this.OnisbnChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isbn13", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string isbn13
+		{
+			get
+			{
+				return this._isbn13;
+			}
+			set
+			{
+				if ((this._isbn13 != value))
+				{
+					this.Onisbn13Changing(value);
+					this.SendPropertyChanging();
+					this._isbn13 = value;
+					this.SendPropertyChanged("isbn13");
+					this.Onisbn13Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_authors", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string authors
+		{
+			get
+			{
+				return this._authors;
+			}
+			set
+			{
+				if ((this._authors != value))
+				{
+					this.OnauthorsChanging(value);
+					this.SendPropertyChanging();
+					this._authors = value;
+					this.SendPropertyChanged("authors");
+					this.OnauthorsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publisher", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string publisher
+		{
+			get
+			{
+				return this._publisher;
+			}
+			set
+			{
+				if ((this._publisher != value))
+				{
+					this.OnpublisherChanging(value);
+					this.SendPropertyChanging();
+					this._publisher = value;
+					this.SendPropertyChanged("publisher");
+					this.OnpublisherChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publish_date", DbType="DateTime NOT NULL")]
+		public System.DateTime publish_date
+		{
+			get
+			{
+				return this._publish_date;
+			}
+			set
+			{
+				if ((this._publish_date != value))
+				{
+					this.Onpublish_dateChanging(value);
+					this.SendPropertyChanging();
+					this._publish_date = value;
+					this.SendPropertyChanged("publish_date");
+					this.Onpublish_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_page_count", DbType="Int NOT NULL")]
+		public int page_count
+		{
+			get
+			{
+				return this._page_count;
+			}
+			set
+			{
+				if ((this._page_count != value))
+				{
+					this.Onpage_countChanging(value);
+					this.SendPropertyChanging();
+					this._page_count = value;
+					this.SendPropertyChanged("page_count");
+					this.Onpage_countChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ratings", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string ratings
+		{
+			get
+			{
+				return this._ratings;
+			}
+			set
+			{
+				if ((this._ratings != value))
+				{
+					this.OnratingsChanging(value);
+					this.SendPropertyChanging();
+					this._ratings = value;
+					this.SendPropertyChanged("ratings");
+					this.OnratingsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created_at", DbType="DateTime NOT NULL")]
+		public System.DateTime created_at
+		{
+			get
+			{
+				return this._created_at;
+			}
+			set
+			{
+				if ((this._created_at != value))
+				{
+					this.Oncreated_atChanging(value);
+					this.SendPropertyChanging();
+					this._created_at = value;
+					this.SendPropertyChanged("created_at");
+					this.Oncreated_atChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_updated_at", DbType="DateTime")]
+		public System.Nullable<System.DateTime> updated_at
+		{
+			get
+			{
+				return this._updated_at;
+			}
+			set
+			{
+				if ((this._updated_at != value))
+				{
+					this.Onupdated_atChanging(value);
+					this.SendPropertyChanging();
+					this._updated_at = value;
+					this.SendPropertyChanged("updated_at");
+					this.Onupdated_atChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted_at", DbType="DateTime")]
+		public System.Nullable<System.DateTime> deleted_at
+		{
+			get
+			{
+				return this._deleted_at;
+			}
+			set
+			{
+				if ((this._deleted_at != value))
+				{
+					this.Ondeleted_atChanging(value);
+					this.SendPropertyChanging();
+					this._deleted_at = value;
+					this.SendPropertyChanged("deleted_at");
+					this.Ondeleted_atChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="book_detail_book", Storage="_books", ThisKey="id", OtherKey="book_details_id")]
+		public EntitySet<book> books
+		{
+			get
+			{
+				return this._books;
+			}
+			set
+			{
+				this._books.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_books(book entity)
+		{
+			this.SendPropertyChanging();
+			entity.book_detail = this;
+		}
+		
+		private void detach_books(book entity)
+		{
+			this.SendPropertyChanging();
+			entity.book_detail = null;
 		}
 	}
 }

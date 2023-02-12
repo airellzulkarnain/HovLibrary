@@ -20,6 +20,7 @@ namespace HovLibrary
             InitializeComponent();
             memberDataGridView.DataSource = (
                 from member in db.members
+                where member.deleted_at == null
                 select new
                 {
                     member.id, 
@@ -67,7 +68,7 @@ namespace HovLibrary
                 (radioButton1.Checked || radioButton2.Checked)
                 )
             {
-                member mmbr = (from m in db.members where m.id == curr_member_id select m).First();
+                member mmbr = (from m in db.members where m.id == curr_member_id && m.deleted_at == null select m).First();
                 mmbr.name = nameTextBox.Text;
                 mmbr.phone = phoneTextBox.Text;
                 mmbr.email = emailTextBox.Text;

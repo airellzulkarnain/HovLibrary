@@ -53,6 +53,12 @@
     <Compile Include="AllBorrowingForm.Designer.cs">
       <DependentUpon>AllBorrowingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="BookListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BookListForm.Designer.cs">
+      <DependentUpon>BookListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="HovLibraryDatabase.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -91,6 +97,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AllBorrowingForm.resx">
+      <DependentUpon>AllBorrowingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BookListForm.resx">
+      <DependentUpon>BookListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -102,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MasterMemberForm.resx">
       <DependentUpon>MasterMemberForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewBorrowingForm.resx">
+      <DependentUpon>NewBorrowingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -11,28 +11,9 @@
       <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="updated_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="deleted_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="book_detail_book" Member="book_detail" ThisKey="book_details_id" OtherKey="id" Type="book_detail" IsForeignKey="true" />
       <Association Name="book_location_book" Member="book_location" ThisKey="book_location_id" OtherKey="id" Type="book_location" IsForeignKey="true" />
       <Association Name="member_book" Member="member" ThisKey="member_id" OtherKey="id" Type="member" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.book_details" Member="book_details">
-    <Type Name="book_detail">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="language" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="isbn" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="isbn13" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="authors" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="publisher" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="publish_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="page_count" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ratings" Type="System.Decimal" DbType="Decimal(3,2) NOT NULL" CanBeNull="false" />
-      <Column Name="rating_count" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="deleted_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="book_detail_book" Member="books" ThisKey="id" OtherKey="book_details_id" Type="book" />
+      <Association Name="book_detail_book" Member="book_detail" ThisKey="book_details_id" OtherKey="id" Type="book_detail" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.book_location" Member="book_locations">
@@ -69,6 +50,24 @@
       <Column Name="updated_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="deleted_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="member_book" Member="books" ThisKey="id" OtherKey="member_id" Type="book" />
+    </Type>
+  </Table>
+  <Table Name="dbo.book_details" Member="book_details">
+    <Type Name="book_detail">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="language" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="isbn" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="isbn13" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="authors" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="publisher" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="publish_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="page_count" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ratings" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="created_at" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="updated_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="deleted_at" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="book_detail_book" Member="books" ThisKey="id" OtherKey="book_details_id" Type="book" />
     </Type>
   </Table>
 </Database>
